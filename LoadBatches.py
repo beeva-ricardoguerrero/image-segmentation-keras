@@ -26,8 +26,8 @@ def getImageArr( path , width , height , imgNorm="sub_mean" , odering='channels_
 		if odering == 'channels_first':
 			img = np.rollaxis(img, 2, 0)
 		return img
-	except Exception, e:
-		print path , e
+	except Exception as e:
+		print(path , e)
 		img = np.zeros((  height , width  , 3 ))
 		if odering == 'channels_first':
 			img = np.rollaxis(img, 2, 0)
@@ -48,8 +48,8 @@ def getSegmentationArr( path , nClasses ,  width , height  ):
 		for c in range(nClasses):
 			seg_labels[: , : , c ] = (img == c ).astype(int)
 
-	except Exception, e:
-		print e
+	except Exception as e:
+		print(e)
 		
 	seg_labels = np.reshape(seg_labels, ( width*height , nClasses ))
 	return seg_labels
