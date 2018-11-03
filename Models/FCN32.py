@@ -77,7 +77,7 @@ def FCN32( n_classes ,  input_height=416, input_width=608 , vgg_level=3):
 	outputHeight = o_shape[2]
 	outputWidth = o_shape[3]
 
-	print "koko" , o_shape
+	print("koko" , o_shape)
 
 	o = (Reshape(( -1  , outputHeight*outputWidth   )))(o)
 	o = (Permute((2, 1)))(o)
