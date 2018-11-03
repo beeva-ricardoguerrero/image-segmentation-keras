@@ -3,7 +3,7 @@ import Models , LoadBatches
 
 
 def parse(argv):
-	
+
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--save_weights_path", type = str  )
 	parser.add_argument("--train_images", type = str  )
@@ -61,7 +61,7 @@ def train(args):
 		m.load_weights(load_weights)
 
 
-	print "Model output shape" ,  m.output_shape
+	print("Model output shape" ,  m.output_shape)
 
 	output_height = m.outputHeight
 	output_width = m.outputWidth
