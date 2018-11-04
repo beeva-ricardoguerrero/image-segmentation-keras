@@ -85,7 +85,8 @@ def FCN8( nClasses ,  input_height=416, input_width=608 , vgg_level=3):
 	x = Dense( 1000 , activation='softmax', name='predictions')(x)
 
 	vgg  = Model(  img_input , x  )
-	#vgg.load_weights(VGG_Weights_path)
+	vgg.load_weights(VGG_Weights_path)
+	print("VGG weights loaded.")
 
 	o = f5
 
