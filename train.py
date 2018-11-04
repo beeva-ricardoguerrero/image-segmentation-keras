@@ -33,12 +33,14 @@ def train(args):
 	train_images_path = args.train_images
 	train_segs_path = args.train_annotations
 	train_batch_size = args.batch_size
+	val_batch_size = args.val_batch_size
 	n_classes = args.n_classes
 	input_height = args.input_height
 	input_width = args.input_width
 	validate = args.validate
 	save_weights_path = args.save_weights_path
 	epochs = args.epochs
+
 	load_weights = args.load_weights
 
 	optimizer_name = args.optimizer_name
@@ -76,13 +78,13 @@ def train(args):
 	if not validate:
 		for ep in range( epochs ):
 			print("Epoch %d / %d\n" % (ep+1, epochs))
-			m.fit_generator( G , 512  , epochs=1 )
+			m.fit_generator( G , int(len(G)/train_batch_size)  , epochs=1 )
 			m.save_weights( save_weights_path + "." + str( ep ) )
 			m.save( save_weights_path + ".model." + str( ep ) )
 	else:
 		for ep in range( epochs ):
 			print("Epoch %d / %d\n" % (ep+1, epochs))
-			m.fit_generator( G , 512  , validation_data=G2 , validation_steps=200 ,  epochs=1 )
+			m.fit_generator( G , int(len(G)/train_batch_size)  , validation_data=G2 , validation_steps=int(len(G2)/val_batch_size) ,  epochs=1 )
 			m.save_weights( save_weights_path + "." + str( ep )  )
 			m.save( save_weights_path + ".model." + str( ep ) )
 
