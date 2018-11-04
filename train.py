@@ -75,16 +75,19 @@ def train(args):
 	if validate:
 		G2  = LoadBatches.imageSegmentationGenerator( val_images_path , val_segs_path ,  val_batch_size,  n_classes , input_height , input_width , output_height , output_width   )
 
+	n_train_images = 367  # hardcoded n images in training dataset
+	n_val_images = 101  # hardcoded n images in validation dataset
+	
 	if not validate:
 		for ep in range( epochs ):
 			print("Epoch %d / %d\n" % (ep+1, epochs))
-			m.fit_generator( G , int(len(G)/train_batch_size)  , epochs=1 )
+			m.fit_generator( G , int(n_train_images/train_batch_size)  , epochs=1 )
 			m.save_weights( save_weights_path + "." + str( ep ) )
 			m.save( save_weights_path + ".model." + str( ep ) )
 	else:
 		for ep in range( epochs ):
 			print("Epoch %d / %d\n" % (ep+1, epochs))
-			m.fit_generator( G , int(len(G)/train_batch_size)  , validation_data=G2 , validation_steps=int(len(G2)/val_batch_size) ,  epochs=1 )
+			m.fit_generator( G , int(n_train_images/train_batch_size)  , validation_data=G2 , validation_steps=int(n_val_images/val_batch_size) ,  epochs=1 )
 			m.save_weights( save_weights_path + "." + str( ep )  )
 			m.save( save_weights_path + ".model." + str( ep ) )
 
