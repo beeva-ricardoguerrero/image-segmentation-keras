@@ -1,11 +1,16 @@
 import sys
 import argparse
-import Models , LoadBatches
-from keras.models import load_model
 import glob
+import random
+
+import Models , LoadBatches
+
 import cv2
 import numpy as np
-import random
+
+from keras.models import load_model
+from tqdm import tqdm
+
 
 def parse(argv):
 	parser = argparse.ArgumentParser()
@@ -50,7 +55,7 @@ def predict(args):
 
 	colors = [  ( random.randint(0,255),random.randint(0,255),random.randint(0,255)   ) for _ in range(n_classes)  ]
 
-	for imgName in images:
+	for imgName in tqdm(images):
 		outName = imgName.replace( images_path ,  args.output_path )
 		X = LoadBatches.getImageArr(imgName , args.input_width  , args.input_height  )
 		pr = m.predict( np.array([X]) )[0]
