@@ -9,7 +9,7 @@ import random
 
 def parse(argv):
 	parser = argparse.ArgumentParser()
-	parser.add_argument("--save_weights_path", type = str  )
+	parser.add_argument("--save_weights_path", type = str, default = ""  )
 	parser.add_argument("--epoch_number", type = int, default = 5 )
 	parser.add_argument("--test_images", type = str , default = "")
 	parser.add_argument("--output_path", type = str , default = "")
@@ -21,14 +21,17 @@ def parse(argv):
 return parser.parse_args(argv)
 
 
-def predict(args)
-	n_classes = args.n_classes
-	model_name = args.model_name
-	images_path = args.test_images
-	input_width =  args.input_width
-	input_height = args.input_height
+def predict(args):
+	
+	save_weights_path = args.save_weights_path
 	epoch_number = args.epoch_number
-
+	images_path = args.test_images
+	output_path = args.output_path
+	input_height = args.input_height
+	input_width =  args.input_width
+	model_name = args.model_name
+	n_classes = args.n_classes
+	
 	modelFns = { 'vgg_segnet':Models.VGGSegnet.VGGSegnet , 'vgg_unet':Models.VGGUnet.VGGUnet , 'vgg_unet2':Models.VGGUnet.VGGUnet2 , 'fcn8':Models.FCN8.FCN8 , 'fcn32':Models.FCN32.FCN32   }
 	modelFN = modelFns[ model_name ]
 
