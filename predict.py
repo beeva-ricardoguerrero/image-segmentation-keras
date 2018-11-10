@@ -66,6 +66,6 @@ def predict(args):
 
 if __name__ == '__main__':
 	argv = sys.argv
-    args = parse(argv[1:])
+	args = parse(argv[1:])
 
 	predict(args)
