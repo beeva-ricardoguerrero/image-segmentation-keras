@@ -18,7 +18,7 @@ def parse(argv):
 	parser.add_argument("--model_name", type = str , default = "")
 	parser.add_argument("--n_classes", type=int )
 
-return parser.parse_args(argv)
+	return parser.parse_args(argv)
 
 
 def predict(args):
