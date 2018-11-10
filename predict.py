@@ -9,7 +9,7 @@ import cv2
 import numpy as np
 
 from keras.models import load_model
-from tqdm import tqdm
+#from tqdm import tqdm
 
 
 def parse(argv):
@@ -55,7 +55,8 @@ def predict(args):
 
 	colors = [  ( random.randint(0,255),random.randint(0,255),random.randint(0,255)   ) for _ in range(n_classes)  ]
 
-	for imgName in tqdm(images):
+	#for imgName in tqdm(images):
+	for imgName in images:
 		outName = imgName.replace( images_path ,  args.output_path )
 		X = LoadBatches.getImageArr(imgName , args.input_width  , args.input_height  )
 		pr = m.predict( np.array([X]) )[0]
